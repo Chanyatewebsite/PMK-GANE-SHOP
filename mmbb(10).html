@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMK GAME SHORT MYANMAR</title>
+
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0f0f0f;color:white;}
+header{background:#414141;text-align:center;padding:15px;font-size:15px;color:#00ffd5;font-weight:bold;}
+section{padding:20px;}
+.card{background:#1e1e1e;border-radius:15px;padding:10px;margin-bottom:20px;}
+h2{color:#00ffd5;margin-top:0;}
+
+.diamond-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.diamond-item{
+  background:#2a2a2a;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  font-size:13px;
+  cursor:pointer;
+}
+.diamond-item:hover{background:#00ffd5;color:black;}
+.price{margin-top:5px;font-weight:bold;}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:10px;
+  border:none;
+}
+
+.btn{
+  margin-top:15px;
+  padding:14px;
+  background:#00ffd5;
+  color:black;
+  text-align:center;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ===== POPUP ===== */
+#popupBg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:999;
+  overflow:auto;
+}
+#popupBox{
+  background:#1e1e1e;
+  width:90%;
+  max-width:400px;
+  margin:30px auto 0; /* Top center, 30px from top */
+  padding:15px;
+  border-radius:15px;
+  position:relative;
+  animation:slideDown 0.3s ease;
+}
+@keyframes slideDown{
+  from{transform:translateY(-50px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+.closeBtn{
+  position:absolute;
+  right:15px;
+  top:10px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.pay-logos{display:flex;gap:15px;margin-top:10px;}
+.pay-logos img{width:90px;background:#fff;padding:10px;border-radius:10px;}
+.payment-copy{display:flex;gap:10px;margin-top:10px;}
+.payment-copy input{flex:1;background:#222;color:white;}
+.payment-copy button{background:#00ffd5;border:none;border-radius:10px;font-weight:bold;}
+
+footer{text-align:center;padding:20px;color:#777;font-size:13px;}
+</style>
+</head>
+
+<body>
+
+<header>🎮 PMK GAME SHORT MYANMAR 💎</header>
+<section>
+
+<!-- DIAMONDS -->
+<div class="card">
+<h2>💎 Diamonds</h2>
+<div class="diamond-grid">
+<div class="diamond-item" onclick="choose('11 Diamond')">11 💎<div class="price">950 Ks</div></div>
+<div class="diamond-item" onclick="choose('22 Diamond')">22 💎<div class="price">1900 Ks</div></div>
+<div class="diamond-item" onclick="choose('33 Diamond')">33 💎<div class="price">2900 Ks</div></div>
+<div class="diamond-item" onclick="choose('44 Diamond')">44 💎<div class="price">3800 Ks</div></div>
+<div class="diamond-item" onclick="choose('56 Diamond')">56 💎<div class="price">4500 Ks</div></div>
+<div class="diamond-item" onclick="choose('86 Diamond')">86 💎<div class="price">5500 Ks</div></div>
+<div class="diamond-item" onclick="choose('172 Diamond')">172 💎<div class="price">9800 Ks</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>😮 Big Diamonds</h2>
+<div class="diamond-grid">
+<div class="diamond-item" onclick="choose('257 Diamond')">257 💎<div class="price">15000 Ks</div></div>
+<div class="diamond-item" onclick="choose('343 Diamond')">343 💎<div class="price">99500 Ks</div></div>
+<div class="diamond-item" onclick="choose('429 Diamond')">429 💎<div class="price">24000 Ks</div></div>
+<div class="diamond-item" onclick="choose('515 Diamond')">515 💎<div class="price">30000 Ks</div></div>
+<div class="diamond-item" onclick="choose('600 Diamond')">600 💎<div class="price">35000 Ks</div></div>
+<div class="diamond-item" onclick="choose('706 Diamond')">706 💎<div class="price">40000 Ks</div></div>
+<div class="diamond-item" onclick="choose('963 Diamond')">963 💎<div class="price">52000 Ks</div></div>
+<div class="diamond-item" onclick="choose('1049 Diamond')">1049 💎<div class="price">60000 Ks</div></div>
+<div class="diamond-item" onclick="choose('1135 Diamond')">1135 💎<div class="price">62000 Ks</div></div>
+<div class="diamond-item" onclick="choose('2195 Diamond')">2195 💎<div class="price">114000 Ks</div></div>
+<div class="diamond-item" onclick="choose('3688 Diamond')">3688 💎<div class="price">200000 Ks</div></div>
+<div class="diamond-item" onclick="choose('5532 Diamond')">5532 💎<div class="price">300000 Ks</div></div>
+<div class="diamond-item" onclick="choose('9288 Diamond')">9288 💎<div class="price">482000 Ks</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>🥳 2× Diamonds</h2>
+<div class="diamond-grid">
+<div class="diamond-item" onclick="choose('50 + 50')">50 + 50<div class="price">3500 Ks</div></div>
+<div class="diamond-item" onclick="choose('150 + 150')">150 + 150<div class="price">9800 Ks</div></div>
+<div class="diamond-item" onclick="choose('250 + 250')">250 + 250<div class="price">15500 Ks</div></div>
+<div class="diamond-item" onclick="choose('500 + 500')">500 + 500<div class="price">32000 Ks</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>🎟 Passes</h2>
+<div class="diamond-grid">
+<div class="diamond-item" onclick="choose('Value Pack')">Value Pack<div class="price">1500 Ks</div></div>
+<div class="diamond-item" onclick="choose('Weekly Pass')">Weekly Pass<div class="price">5700 Ks</div></div>
+<div class="diamond-item" onclick="choose('Twilight Pass')">Twilight Pass<div class="price">32000 Ks</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>💰 Payment</h2>
+<div class="pay-logos">
+<img src="9a1ddf812ac383f246e7e41e485ca11f.jpg">
+<img src="ab76bb0483ac7c445251c650cc7c1227.jpg">
+</div>
+<p>Name - Nyei Ei Phyo</p>
+<div class="payment-copy">
+<input id="payInfo" readonly value="09789457150">
+<button onclick="copyPay()">Copy</button>
+</div>
+</div>
+
+</section>
+
+<footer>© 2026 MLBB Diamond Shop • Trusted 💯</footer>
+
+<!-- POPUP ORDER FORM -->
+<div id="popupBg">
+  <div id="popupBox">
+    <div class="closeBtn" onclick="closePopup()">✖</div>
+    <h2>📝 Order Form</h2>
+    <input id="gid" placeholder="Game ID">
+    <input id="sid" placeholder="Server ID">
+    <select id="dia"></select>
+    <input type="file" id="img">
+    <textarea id="pay" placeholder="Payment Details"></textarea>
+    <div class="btn" onclick="sendOrder()">📩 Send Order</div>
+  </div>
+</div>
+
+<script>
+function choose(val){
+  document.getElementById("popupBg").style.display="block";
+  const d=document.getElementById("dia");
+  d.innerHTML=`<option>${val}</option>`;
+}
+function closePopup(){
+  document.getElementById("popupBg").style.display="none";
+}
+function copyPay(){
+  navigator.clipboard.writeText(payInfo.value);
+  alert("Copied");
+}
+function sendOrder(){
+  if(!gid.value||!sid.value||!pay.value){alert("အချက်အလက်ပြည့်စုံပါ");return;}
+  const msg=`MLBB Order\nID:${gid.value}\nServer:${sid.value}\nDiamond:${dia.value}\nPayment:${pay.value}`;
+  window.open("https://t.me/Mgflash_2038?text="+encodeURIComponent(msg));
+}
+</script>
+
+</body>
+</html>
