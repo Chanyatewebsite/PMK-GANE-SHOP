@@ -7,45 +7,38 @@
 <style>
     :root { --main: #00ffd5; --bg: #0f0f0f; --card: #1e1e1e; --text: #ffffff; }
     body{margin:0;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:var(--bg);color:var(--text);}
-    header{background:var(--card);text-align:center;padding:15px;color:var(--main);font-weight:bold;border-bottom:2px solid var(--main);position:sticky;top:0;z-index:100;}
+    header{background:var(--card);text-align:center;padding:15px;color:var(--main);font-weight:bold;border-bottom:2px solid var(--main);position:sticky;top:0;z-index:100;box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
     
     section{padding:20px;}
     .card{background:var(--card);border-radius:15px;padding:15px;margin-bottom:20px;border:1px solid #333;}
     h2{color:var(--main);margin-top:0;font-size:18px;margin-bottom:15px;text-transform: uppercase;}
     
     /* Login Section */
-    #authSection { max-width: 400px; margin: 40px auto; }
+    #authSection { max-width: 400px; margin: 40px auto; display: block; }
     .tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #333; }
-    .tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; color: #777; font-weight: bold; }
+    .tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; color: #777; font-weight: bold; transition: 0.3s; }
     .tab.active { color: var(--main); border-bottom: 2px solid var(--main); }
 
     /* Shop Section */
-    #mainShop { display: none; } /* Login ဝင်ပြီးမှ ပေါ်မည် */
+    #mainShop { display: none; }
     .diamond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
-    .diamond-item { 
-        background: #2a2a2a; 
-        border-radius: 12px; 
-        padding: 15px 5px; 
-        text-align: center; 
-        font-size: 13px; 
-        cursor: pointer; 
-        border: 1px solid #333; 
-        transition: 0.3s;
-        display: block; /* Click ရအောင် */
-    }
-    .diamond-item:hover { background: var(--main); color: black; font-weight: bold; transform: scale(1.05); }
+    .diamond-item { background: #2a2a2a; border-radius: 12px; padding: 15px 5px; text-align: center; font-size: 13px; cursor: pointer; transition: 0.3s; border: 1px solid #333; display: block; }
+    .diamond-item:hover { background: var(--main); color: black; transform: translateY(-3px); font-weight: bold; }
     .price { font-weight: bold; display: block; margin-top: 5px; color: var(--main); }
     .diamond-item:hover .price { color: black; }
 
     /* Forms */
     input, select { width: 100%; padding: 12px; margin-top: 10px; border-radius: 10px; border: 1px solid #444; background: #2a2a2a; color: white; box-sizing: border-box; outline: none; }
-    .btn { margin-top: 15px; padding: 14px; background: var(--main); color: black; text-align: center; border-radius: 12px; font-weight: bold; cursor: pointer; }
+    input:focus { border-color: var(--main); }
+    .btn { margin-top: 15px; padding: 14px; background: var(--main); color: black; text-align: center; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .btn:active { transform: scale(0.98); }
     .logout-btn { float: right; background: #ff4d4d; color: white; padding: 5px 12px; border-radius: 8px; font-size: 11px; cursor: pointer; }
 
     /* Popup */
-    #popupBg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;overflow-y:auto;padding:20px 0;}
-    #popupBox{background:var(--card);width:90%;max-width:400px;margin:20px auto;padding:25px;border-radius:20px;position:relative;border:1px solid var(--main);}
-    .payment-info { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--main); font-size: 14px; }
+    #popupBg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:999;overflow-y:auto;padding:20px 0;}
+    #popupBox{background:var(--card);width:90%;max-width:400px;margin:10px auto;padding:25px;border-radius:20px;position:relative;border:1px solid var(--main);}
+    .payment-info { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--main); }
+    .payment-info p { margin: 5px 0; font-size: 14px; }
     .closeBtn{position:absolute;right:15px;top:10px;font-size:24px;cursor:pointer;color:#ff4d4d; padding: 5px;}
     #statusMsg { font-size: 13px; text-align: center; margin-top: 15px; font-weight: bold; }
 </style>
@@ -56,6 +49,7 @@
 
 <section id="authSection">
     <div class="card">
+        <h2 style="text-align: center;">Account Access</h2>
         <div class="tabs">
             <div id="loginTab" class="tab active" onclick="showAuth('login')">Login</div>
             <div id="signupTab" class="tab" onclick="showAuth('signup')">Sign Up</div>
@@ -104,7 +98,7 @@
         <h2 style="text-align:center;">📝 Confirm Order</h2>
         
         <div class="payment-info">
-            <p style="color: #00ffd5; font-weight: bold;">💰 ငွေပေးချေရန်</p>
+            <p style="color: #00ffd5; font-weight: bold; margin-bottom: 8px;">💰 ငွေပေးချေရန်</p>
             <p>Kpay/Wave: <span style="color:var(--main); font-weight:bold;">09 789457150</span></p>
             <p>Name: <span style="color: #aaa;">Nyein Ei Phyo</span></p>
         </div>
@@ -132,23 +126,19 @@
 </div>
 
 <script>
+// --- CONFIGURATION ---
 const BOT_TOKEN = '8540139841:AAHk85ZhZybd1Wh_YAWqeCk6OpTCjqNojr8'; 
-const ADMIN_1 = '7090654595'; 
-const ADMIN_2 = 'ဒုတိယ_ADMIN_ID_ဒီမှာထည့်ပါ'; 
+const ADMIN_IDS = ['8582088849', '7090654595']; // သင်ပေးထားသော Admin ID နှစ်ခုလုံး
 
-// Login ဝင်မှ Shop ပေါ်အောင် လုပ်ထားသည်
 function showAuth(type) {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('signupForm').style.display = type === 'signup' ? 'block' : 'none';
-    document.getElementById('loginTab').className = 'tab ' + (type === 'login' ? 'active' : '');
-    document.getElementById('signupTab').className = 'tab ' + (type === 'signup' ? 'active' : '');
 }
 
 function handleAuth(action) {
     const user = document.getElementById(action === 'login' ? 'logUser' : 'regUser').value;
     const pass = document.getElementById(action === 'login' ? 'logPass' : 'regPass').value;
-    if(!user || !pass) { alert("အချက်အလက်ဖြည့်ပါ"); return; }
-    
+    if(!user || !pass) { alert("ဖြည့်စွက်ပါ"); return; }
     document.getElementById('userLabel').innerText = user;
     document.getElementById('authSection').style.display = 'none';
     document.getElementById('mainShop').style.display = 'block';
@@ -156,7 +146,6 @@ function handleAuth(action) {
 
 function logout() { location.reload(); }
 
-// Diamond Button နှိပ်လျှင် Popup ပေါ်ရန်
 function choose(name, price) {
     document.getElementById("itemName").value = name + " - " + price + " Ks";
     document.getElementById("popupBg").style.display = "block";
@@ -178,36 +167,27 @@ async function sendToBot() {
 
     if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်အားလုံး ပြည့်စုံစွာဖြည့်ပါ"); return; }
 
-    status.innerText = "⏳ ပို့နေသည်...";
+    status.innerText = "⏳ Admin နှစ်ဦးလုံးထံ ပို့နေသည်...";
     status.style.color = "white";
 
-    const captionText = "📩 MLBB Diamond Order\n" +
-                        "💎 Item: " + item + "\n" +
-                        "🎮 Game ID: " + gid + "\n" +
-                        "📱 Server ID: " + sid + "\n" +
-                        "💳 Payment Method: " + pMethod + "\n" +
-                        "💰 Payment Note: " + pNote + "\n\n" +
-                        "Screenshot ကို Chat မှာ ပို့ထားပါတယ်";
+    const captionText = `📩 MLBB Diamond Order\n💎 Item: ${item}\n🎮 Game ID: ${gid}\n📱 Server ID: ${sid}\n💳 Payment Method: ${pMethod}\n💰 Payment Note: ${pNote}\n\nScreenshot ကို Chat မှာ ပို့ထားပါတယ်`;
 
-    const targets = [ADMIN_1, ADMIN_2];
     let successCount = 0;
 
-    for (const chat_id of targets) {
-        if (chat_id.includes('ဒီမှာထည့်ပါ')) continue;
-
+    for (const chat_id of ADMIN_IDS) {
         const formData = new FormData();
         formData.append("chat_id", chat_id);
         formData.append("photo", file);
         formData.append("caption", captionText);
 
         try {
-            const response = await fetch("https://api.telegram.org/bot" + BOT_TOKEN + "/sendPhoto", {
+            const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
                 method: "POST",
                 body: formData
             });
             const res = await response.json();
             if (res.ok) successCount++;
-        } catch (e) { console.log(e); }
+        } catch (e) { console.error(e); }
     }
 
     if (successCount > 0) {
@@ -215,7 +195,7 @@ async function sendToBot() {
         status.style.color = "#00ffd5";
         setTimeout(closePopup, 2000);
     } else {
-        status.innerText = "❌ ပို့မရပါ။ Bot ကို Start လုပ်ထားပါ။";
+        status.innerText = "❌ မအောင်မြင်ပါ။ Admin များမှ Bot ကို Start လုပ်ထားဖို့ လိုပါသည်။";
         status.style.color = "#ff4d4d";
     }
 }
