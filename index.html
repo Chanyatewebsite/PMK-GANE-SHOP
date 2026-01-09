@@ -7,40 +7,46 @@
 <style>
     :root { --main: #00ffd5; --bg: #0f0f0f; --card: #1e1e1e; --text: #ffffff; }
     body{margin:0;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:var(--bg);color:var(--text);}
-    header{background:var(--card);text-align:center;padding:15px;color:var(--main);font-weight:bold;border-bottom:2px solid var(--main);position:sticky;top:0;z-index:100;box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
+    header{background:var(--card);text-align:center;padding:15px;color:var(--main);font-weight:bold;border-bottom:2px solid var(--main);position:sticky;top:0;z-index:100;}
     
     section{padding:20px;}
     .card{background:var(--card);border-radius:15px;padding:15px;margin-bottom:20px;border:1px solid #333;}
     h2{color:var(--main);margin-top:0;font-size:18px;margin-bottom:15px;text-transform: uppercase;}
     
     /* Login Section */
-    #authSection { max-width: 400px; margin: 40px auto; display: block; }
+    #authSection { max-width: 400px; margin: 40px auto; }
     .tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #333; }
-    .tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; color: #777; font-weight: bold; transition: 0.3s; }
+    .tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; color: #777; font-weight: bold; }
     .tab.active { color: var(--main); border-bottom: 2px solid var(--main); }
 
     /* Shop Section */
-    #mainShop { display: none; }
-    .diamond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
-    .diamond-item { background: #2a2a2a; border-radius: 12px; padding: 15px 5px; text-align: center; font-size: 13px; cursor: pointer; transition: 0.3s; border: 1px solid #333; }
-    .diamond-item:hover { background: var(--main); color: black; transform: translateY(-3px); font-weight: bold; }
+    #mainShop { display: none; } /* Login ဝင်ပြီးမှ ပေါ်မည် */
+    .diamond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
+    .diamond-item { 
+        background: #2a2a2a; 
+        border-radius: 12px; 
+        padding: 15px 5px; 
+        text-align: center; 
+        font-size: 13px; 
+        cursor: pointer; 
+        border: 1px solid #333; 
+        transition: 0.3s;
+        display: block; /* Click ရအောင် */
+    }
+    .diamond-item:hover { background: var(--main); color: black; font-weight: bold; transform: scale(1.05); }
     .price { font-weight: bold; display: block; margin-top: 5px; color: var(--main); }
     .diamond-item:hover .price { color: black; }
 
     /* Forms */
     input, select { width: 100%; padding: 12px; margin-top: 10px; border-radius: 10px; border: 1px solid #444; background: #2a2a2a; color: white; box-sizing: border-box; outline: none; }
-    input:focus { border-color: var(--main); }
-    .btn { margin-top: 15px; padding: 14px; background: var(--main); color: black; text-align: center; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    .btn:active { transform: scale(0.98); }
+    .btn { margin-top: 15px; padding: 14px; background: var(--main); color: black; text-align: center; border-radius: 12px; font-weight: bold; cursor: pointer; }
     .logout-btn { float: right; background: #ff4d4d; color: white; padding: 5px 12px; border-radius: 8px; font-size: 11px; cursor: pointer; }
 
-    /* Popup & Payment Info */
-    #popupBg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:999;overflow-y:auto;padding:20px 0;}
-    #popupBox{background:var(--card);width:90%;max-width:400px;margin:10px auto;padding:25px;border-radius:20px;position:relative;border:1px solid var(--main);}
-    .payment-info { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--main); }
-    .payment-info p { margin: 5px 0; font-size: 14px; }
-    .copy-text { color: var(--main); font-weight: bold; }
-    .closeBtn{position:absolute;right:15px;top:10px;font-size:24px;cursor:pointer;color:#ff4d4d;}
+    /* Popup */
+    #popupBg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;overflow-y:auto;padding:20px 0;}
+    #popupBox{background:var(--card);width:90%;max-width:400px;margin:20px auto;padding:25px;border-radius:20px;position:relative;border:1px solid var(--main);}
+    .payment-info { background: #111; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--main); font-size: 14px; }
+    .closeBtn{position:absolute;right:15px;top:10px;font-size:24px;cursor:pointer;color:#ff4d4d; padding: 5px;}
     #statusMsg { font-size: 13px; text-align: center; margin-top: 15px; font-weight: bold; }
 </style>
 </head>
@@ -50,7 +56,6 @@
 
 <section id="authSection">
     <div class="card">
-        <h2 style="text-align: center;">Account Access</h2>
         <div class="tabs">
             <div id="loginTab" class="tab active" onclick="showAuth('login')">Login</div>
             <div id="signupTab" class="tab" onclick="showAuth('signup')">Sign Up</div>
@@ -70,12 +75,12 @@
 
 <section id="mainShop">
     <div style="margin-bottom: 20px; overflow: hidden; background: #1e1e1e; padding: 10px; border-radius: 10px;">
-        <span>Welcome, <b id="userLabel" style="color:var(--main);">User</b></span>
+        <span>User: <b id="userLabel" style="color:var(--main);">User</b></span>
         <div class="logout-btn" onclick="logout()">Logout</div>
     </div>
 
     <div class="card">
-        <h2>💎 Mobile Legends Diamonds</h2>
+        <h2>💎 MLBB Diamonds</h2>
         <div class="diamond-grid">
             <div class="diamond-item" onclick="choose('11 Diamond', '950')">11 💎<span class="price">950 Ks</span></div>
             <div class="diamond-item" onclick="choose('56 Diamond', '4500')">56 💎<span class="price">4500 Ks</span></div>
@@ -99,8 +104,8 @@
         <h2 style="text-align:center;">📝 Confirm Order</h2>
         
         <div class="payment-info">
-            <p style="color: #00ffd5; font-weight: bold; margin-bottom: 8px;">💰 ငွေပေးချေရန် နံပါတ်များ</p>
-            <p>Kpay/Wave: <span class="copy-text">09 789457150</span></p>
+            <p style="color: #00ffd5; font-weight: bold;">💰 ငွေပေးချေရန်</p>
+            <p>Kpay/Wave: <span style="color:var(--main); font-weight:bold;">09 789457150</span></p>
             <p>Name: <span style="color: #aaa;">Nyein Ei Phyo</span></p>
         </div>
 
@@ -129,8 +134,9 @@
 <script>
 const BOT_TOKEN = '8540139841:AAHk85ZhZybd1Wh_YAWqeCk6OpTCjqNojr8'; 
 const ADMIN_1 = '7090654595'; 
-const ADMIN_2 = '8582088849'; 
+const ADMIN_2 = 'ဒုတိယ_ADMIN_ID_ဒီမှာထည့်ပါ'; 
 
+// Login ဝင်မှ Shop ပေါ်အောင် လုပ်ထားသည်
 function showAuth(type) {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('signupForm').style.display = type === 'signup' ? 'block' : 'none';
@@ -141,19 +147,25 @@ function showAuth(type) {
 function handleAuth(action) {
     const user = document.getElementById(action === 'login' ? 'logUser' : 'regUser').value;
     const pass = document.getElementById(action === 'login' ? 'logPass' : 'regPass').value;
-    if(!user || !pass) { alert("အချက်အလက်များကို ဖြည့်စွက်ပါ"); return; }
-    if(action === 'signup') { alert("အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။ Login ဝင်ပေးပါ။"); showAuth('login'); } 
-    else { document.getElementById('userLabel').innerText = user; document.getElementById('authSection').style.display = 'none'; document.getElementById('mainShop').style.display = 'block'; }
+    if(!user || !pass) { alert("အချက်အလက်ဖြည့်ပါ"); return; }
+    
+    document.getElementById('userLabel').innerText = user;
+    document.getElementById('authSection').style.display = 'none';
+    document.getElementById('mainShop').style.display = 'block';
 }
 
 function logout() { location.reload(); }
 
+// Diamond Button နှိပ်လျှင် Popup ပေါ်ရန်
 function choose(name, price) {
-    document.getElementById("popupBg").style.display = "block";
     document.getElementById("itemName").value = name + " - " + price + " Ks";
+    document.getElementById("popupBg").style.display = "block";
 }
 
-function closePopup() { document.getElementById("popupBg").style.display = "none"; }
+function closePopup() { 
+    document.getElementById("popupBg").style.display = "none"; 
+    document.getElementById("statusMsg").innerText = "";
+}
 
 async function sendToBot() {
     const gid = document.getElementById("gid").value;
@@ -166,7 +178,7 @@ async function sendToBot() {
 
     if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်အားလုံး ပြည့်စုံစွာဖြည့်ပါ"); return; }
 
-    status.innerText = "⏳ Admin နှစ်ဦးလုံးထံ ပို့နေသည်...";
+    status.innerText = "⏳ ပို့နေသည်...";
     status.style.color = "white";
 
     const captionText = "📩 MLBB Diamond Order\n" +
@@ -181,7 +193,7 @@ async function sendToBot() {
     let successCount = 0;
 
     for (const chat_id of targets) {
-        if (chat_id.includes('ဒီနေရာမှာ')) continue;
+        if (chat_id.includes('ဒီမှာထည့်ပါ')) continue;
 
         const formData = new FormData();
         formData.append("chat_id", chat_id);
@@ -195,7 +207,7 @@ async function sendToBot() {
             });
             const res = await response.json();
             if (res.ok) successCount++;
-        } catch (e) { console.error("Error sending to " + chat_id); }
+        } catch (e) { console.log(e); }
     }
 
     if (successCount > 0) {
@@ -203,7 +215,7 @@ async function sendToBot() {
         status.style.color = "#00ffd5";
         setTimeout(closePopup, 2000);
     } else {
-        status.innerText = "❌ မအောင်မြင်ပါ။ Bot ကို Start လုပ်ထားပါ။";
+        status.innerText = "❌ ပို့မရပါ။ Bot ကို Start လုပ်ထားပါ။";
         status.style.color = "#ff4d4d";
     }
 }
