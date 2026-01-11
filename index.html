@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PMK GAME SHOP - MYANMAR</title>
 <style>
-    /* Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
     :root { 
@@ -23,6 +22,7 @@
         background: var(--bg);
         color: var(--text);
         background-image: radial-gradient(circle at 50% -20%, #00ffd533, transparent);
+        min-height: 100vh;
     }
 
     header {
@@ -32,120 +32,104 @@
         padding: 20px;
         color: var(--main);
         font-weight: 700;
-        letter-spacing: 1px;
         border-bottom: 1px solid #30363d;
         position: sticky;
         top: 0;
         z-index: 100;
     }
 
-    section { padding: 20px; max-width: 600px; margin: auto; }
+    section { padding: 20px; max-width: 500px; margin: auto; }
+
+    /* Login & Signup Card */
+    .auth-card {
+        background: var(--card);
+        border-radius: 25px;
+        padding: 30px;
+        border: 1px solid #30363d;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        margin-top: 50px;
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tabs { display: flex; background: var(--accent); border-radius: 15px; padding: 5px; margin-bottom: 25px; }
+    .tab { 
+        flex: 1; text-align: center; padding: 12px; cursor: pointer; 
+        border-radius: 12px; transition: 0.3s; font-weight: 600; color: #8b949e;
+    }
+    .tab.active { background: var(--main); color: #000; }
+
+    /* Diamond Shop Section (Hidden initially) */
+    #mainShop { display: none; animation: fadeIn 0.5s ease; }
 
     .card {
         background: var(--card);
         border-radius: 20px;
         padding: 20px;
-        margin-bottom: 25px;
         border: 1px solid #30363d;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    h2 {
-        color: var(--main);
-        font-size: 16px;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    /* Auth Styling */
-    .tabs { display: flex; background: var(--accent); border-radius: 12px; padding: 5px; margin-bottom: 25px; }
-    .tab { 
-        flex: 1; text-align: center; padding: 10px; cursor: pointer; 
-        border-radius: 10px; transition: 0.3s; font-weight: 600; color: #8b949e;
-    }
-    .tab.active { background: var(--main); color: #000; }
-
-    /* Diamond Grid */
     .diamond-grid { 
         display: grid; 
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 12px; 
-    }
-
-    @media (max-width: 400px) {
-        .diamond-grid { grid-template-columns: repeat(2, 1fr); }
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px; 
     }
 
     .diamond-item {
         background: var(--accent);
         border-radius: 15px;
-        padding: 15px 10px;
+        padding: 20px 10px;
         text-align: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: 0.3s;
         border: 1px solid transparent;
     }
 
     .diamond-item:hover {
         border-color: var(--main);
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 255, 213, 0.2);
+        background: rgba(0, 255, 213, 0.05);
+        transform: scale(1.03);
     }
 
-    .diamond-item img { width: 30px; margin-bottom: 8px; }
-    .d-amount { display: block; font-weight: 600; font-size: 14px; }
-    .price { font-size: 12px; color: var(--main); font-weight: 700; }
+    .price { display: block; color: var(--main); font-weight: 700; margin-top: 5px; }
 
-    /* Forms */
-    input, select {
-        width: 100%; padding: 14px; margin-top: 12px; border-radius: 12px;
+    /* Form Elements */
+    input {
+        width: 100%; padding: 15px; margin-top: 15px; border-radius: 12px;
         border: 1px solid #30363d; background: #0d1117; color: white;
-        box-sizing: border-box; font-family: inherit;
+        box-sizing: border-box; outline: none;
     }
-
-    input:focus { border-color: var(--main); outline: none; }
+    input:focus { border-color: var(--main); }
 
     .btn {
-        margin-top: 20px; padding: 15px; background: var(--main);
+        margin-top: 25px; padding: 15px; background: var(--main);
         color: #000; text-align: center; border-radius: 12px;
         font-weight: 700; cursor: pointer; transition: 0.3s;
     }
+    .btn:hover { background: var(--main-dark); }
 
-    .btn:hover { background: var(--main-dark); transform: scale(1.02); }
-
-    .logout-btn { 
-        background: #f8514933; color: #f85149; padding: 6px 15px; 
-        border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;
+    .user-info {
+        display: flex; justify-content: space-between; align-items: center;
+        background: var(--card); padding: 12px 20px; border-radius: 15px;
+        margin-bottom: 20px; border: 1px solid #30363d;
     }
+
+    .logout-btn { color: #f85149; cursor: pointer; font-size: 14px; font-weight: 600; }
 
     /* Popup */
     #popupBg {
         display:none; position:fixed; inset:0; 
-        background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+        background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
         z-index: 999; padding: 20px;
     }
-
     #popupBox {
-        background: var(--card); max-width: 400px; margin: 30px auto;
-        padding: 30px; border-radius: 25px; position: relative;
-        border: 1px solid #30363d; animation: slideUp 0.3s ease;
+        background: var(--card); max-width: 400px; margin: 20px auto;
+        padding: 25px; border-radius: 25px; border: 1px solid var(--main);
     }
-
-    @keyframes slideUp {
-        from { transform: translateY(20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .payment-info {
-        background: #0d1117; padding: 15px; border-radius: 15px;
-        margin-bottom: 20px; border: 1px solid #30363d;
-    }
-
-    .closeBtn { position: absolute; right: 20px; top: 20px; color: #8b949e; cursor: pointer; }
-
-    #statusMsg { text-align: center; margin-top: 15px; font-weight: 600; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -153,57 +137,48 @@
 <header>PMK GAME SHOP</header>
 
 <section id="authSection">
-    <div class="card">
-        <h2 style="justify-content: center;">WELCOME BACK</h2>
+    <div class="auth-card">
+        <h2 style="text-align: center; margin-top: 0; letter-spacing: 2px;">AUTHENTICATION</h2>
         <div class="tabs">
-            <div id="loginTab" class="tab active" onclick="showAuth('login')">Login</div>
-            <div id="signupTab" class="tab" onclick="showAuth('signup')">Sign Up</div>
+            <div id="loginTab" class="tab active" onclick="switchAuth('login')">Login</div>
+            <div id="signupTab" class="tab" onclick="switchAuth('signup')">Sign Up</div>
         </div>
+        
         <div id="loginForm">
             <input type="text" id="logUser" placeholder="Username">
             <input type="password" id="logPass" placeholder="Password">
-            <div class="btn" onclick="handleAuth('login')">LOGIN</div>
+            <div class="btn" onclick="processAuth()">LOGIN ဝင်မည်</div>
         </div>
+
         <div id="signupForm" style="display:none;">
-            <input type="text" id="regUser" placeholder="Username">
-            <input type="password" id="regPass" placeholder="Password">
-            <div class="btn" onclick="handleAuth('signup')">CREATE ACCOUNT</div>
+            <input type="text" id="regUser" placeholder="Username အသစ်">
+            <input type="password" id="regPass" placeholder="Password အသစ်">
+            <input type="password" placeholder="Confirm Password">
+            <div class="btn" onclick="processAuth()">အကောင့်ဖွင့်မည်</div>
         </div>
     </div>
 </section>
 
 <section id="mainShop">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <span>Hi, <b id="userLabel" style="color:var(--main);">Player</b> 👋</span>
-        <div class="logout-btn" onclick="logout()">Logout</div>
+    <div class="user-info">
+        <span>Player: <b id="userLabel" style="color:var(--main);">Guest</b></span>
+        <span class="logout-btn" onclick="logout()">Logout</span>
     </div>
 
     <div class="card">
-        <h2>💎 MOBILE LEGENDS</h2>
+        <h2 style="color:var(--main); font-size: 18px; margin-top:0;">💎 MLBB DIAMONDS</h2>
         <div class="diamond-grid">
             <div class="diamond-item" onclick="choose('11 Diamond', '950')">
-                <span class="d-amount">11 💎</span>
-                <span class="price">950 Ks</span>
+                <span>11 💎</span><span class="price">950 Ks</span>
             </div>
             <div class="diamond-item" onclick="choose('56 Diamond', '4500')">
-                <span class="d-amount">56 💎</span>
-                <span class="price">4500 Ks</span>
-            </div>
-            <div class="diamond-item" onclick="choose('112 Diamond', '8900')">
-                <span class="d-amount">112 💎</span>
-                <span class="price">8900 Ks</span>
+                <span>56 💎</span><span class="price">4500 Ks</span>
             </div>
             <div class="diamond-item" onclick="choose('170 Diamond', '13500')">
-                <span class="d-amount">170 💎</span>
-                <span class="price">13,500 Ks</span>
-            </div>
-            <div class="diamond-item" onclick="choose('282 Diamond', '22000')">
-                <span class="d-amount">282 💎</span>
-                <span class="price">22,000 Ks</span>
+                <span>170 💎</span><span class="price">13,500 Ks</span>
             </div>
             <div class="diamond-item" onclick="choose('Weekly Pass', '5700')">
-                <span class="d-amount">Weekly 🎟</span>
-                <span class="price">5,700 Ks</span>
+                <span>Weekly 🎟</span><span class="price">5,700 Ks</span>
             </div>
         </div>
     </div>
@@ -211,36 +186,18 @@
 
 <div id="popupBg">
     <div id="popupBox">
-        <div class="closeBtn" onclick="closePopup()">✕</div>
-        <h2 style="margin-top:0">CONFIRM ORDER</h2>
-        
-        <div class="payment-info">
-            <p style="color:var(--main); margin:0 0 10px 0; font-weight:600;">Payment Details</p>
-            <div style="font-size: 13px; line-height: 1.6;">
-                Kpay/Wave: <b>09 789457150</b><br>
-                Name: Nyein Ei Phyo
-            </div>
-        </div>
-
-        <input type="text" id="itemName" readonly style="border-color: var(--main); color: var(--main); font-weight: bold;">
-        
+        <h3 style="text-align:center; color:var(--main);">CONFIRM ORDER</h3>
+        <input type="text" id="itemName" readonly style="color:var(--main); font-weight:bold;">
         <div style="display: flex; gap: 10px;">
             <input type="number" id="gid" placeholder="Game ID">
             <input type="number" id="sid" placeholder="Server">
         </div>
-
-        <select id="pMethod">
-            <option value="KBZ Pay">KBZ Pay</option>
-            <option value="Wave Money">Wave Money</option>
-        </select>
-
-        <input type="text" id="pNote" placeholder="Last 6 digits">
-        
-        <p style="font-size: 12px; margin: 15px 0 5px 0; color: #8b949e;">Upload Screenshot:</p>
-        <input type="file" id="receipt" accept="image/*" style="font-size: 12px;">
-        
-        <div class="btn" id="sendBtn" onclick="sendToBot()">CONFIRM & SEND</div>
-        <div id="statusMsg"></div>
+        <input type="text" id="pNote" placeholder="Kpay နောက်ဆုံးဂဏန်း ၆ လုံး">
+        <p style="font-size: 12px; margin: 15px 0 5px 0;">ငွေလွှဲဖြတ်ပိုင်းတင်ပါ -</p>
+        <input type="file" id="receipt" accept="image/*">
+        <div class="btn" onclick="sendToBot()">အော်ဒါတင်မည်</div>
+        <div class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closePopup()">ပယ်ဖျက်မည်</div>
+        <div id="statusMsg" style="text-align:center; margin-top:10px;"></div>
     </div>
 </div>
 
@@ -248,19 +205,26 @@
 const BOT_TOKEN = '8540139841:AAHk85ZhZybd1Wh_YAWqeCk6OpTCjqNojr8'; 
 const ADMIN_IDS = ['8582088849', '7090654595']; 
 
-function showAuth(type) {
+// Login/Signup Switch
+function switchAuth(type) {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('signupForm').style.display = type === 'signup' ? 'block' : 'none';
-    document.getElementById('loginTab').className = 'tab ' + (type === 'login' ? 'active' : '');
-    document.getElementById('signupTab').className = 'tab ' + (type === 'signup' ? 'active' : '');
+    document.getElementById('loginTab').classList.toggle('active', type === 'login');
+    document.getElementById('signupTab').classList.toggle('active', type === 'signup');
 }
 
-function handleAuth(action) {
-    const user = document.getElementById(action === 'login' ? 'logUser' : 'regUser').value;
-    if(!user) { alert("Please enter username"); return; }
-    document.getElementById('userLabel').innerText = user;
-    document.getElementById('authSection').style.display = 'none';
-    document.getElementById('mainShop').style.display = 'block';
+// Auth Process
+function processAuth() {
+    const user = document.getElementById('logUser').value || document.getElementById('regUser').value;
+    const pass = document.getElementById('logPass').value || document.getElementById('regPass').value;
+
+    if(user && pass) {
+        document.getElementById('userLabel').innerText = user;
+        document.getElementById('authSection').style.display = 'none'; // Hide Login
+        document.getElementById('mainShop').style.display = 'block';   // Show Shop
+    } else {
+        alert("Username နှင့် Password ဖြည့်ပါ။");
+    }
 }
 
 function logout() { location.reload(); }
@@ -280,31 +244,28 @@ async function sendToBot() {
     const file = document.getElementById("receipt").files[0];
     const status = document.getElementById("statusMsg");
 
-    if (!gid || !sid || !pNote || !file) { alert("Please fill all fields!"); return; }
+    if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်စုံအောင်ဖြည့်ပါ။"); return; }
 
-    status.innerText = "Processing...";
-    status.style.color = "var(--main)";
-
-    const captionText = `📩 NEW ORDER\n💎 Item: ${item}\n🎮 ID: ${gid} (${sid})\n💰 Note: ${pNote}`;
+    status.innerText = "ပို့ဆောင်နေသည်...";
+    const caption = `📩 ORDER\n💎 Item: ${item}\n🎮 ID: ${gid} (${sid})\n💰 Note: ${pNote}`;
 
     let success = false;
-    for (const chat_id of ADMIN_IDS) {
-        const formData = new FormData();
-        formData.append("chat_id", chat_id);
-        formData.append("photo", file);
-        formData.append("caption", captionText);
-
+    for (const id of ADMIN_IDS) {
+        const fd = new FormData();
+        fd.append("chat_id", id);
+        fd.append("photo", file);
+        fd.append("caption", caption);
         try {
-            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: "POST", body: formData });
-            success = true;
-        } catch (e) { console.error(e); }
+            const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: "POST", body: fd });
+            if(res.ok) success = true;
+        } catch (e) {}
     }
 
-    if (success) {
-        status.innerText = "✅ Order Placed Successfully!";
+    if(success) {
+        status.innerText = "✅ အောင်မြင်ပါသည်။";
         setTimeout(closePopup, 2000);
     } else {
-        status.innerText = "❌ Error. Try again.";
+        status.innerText = "❌ မအောင်မြင်ပါ။";
     }
 }
 </script>
