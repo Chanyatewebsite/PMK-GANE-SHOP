@@ -38,21 +38,21 @@
         z-index: 100;
     }
 
-    section { padding: 20px; max-width: 500px; margin: auto; }
+    section { padding: 20px; max-width: 600px; margin: auto; }
 
-    /* Login & Signup Card */
+    /* Auth Card */
     .auth-card {
         background: var(--card);
         border-radius: 25px;
         padding: 30px;
         border: 1px solid #30363d;
         box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        margin-top: 50px;
+        margin-top: 30px;
         animation: fadeIn 0.5s ease;
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
+        from { opacity: 0; transform: translateY(-10px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
@@ -63,82 +63,83 @@
     }
     .tab.active { background: var(--main); color: #000; }
 
-    /* Diamond Shop Section (Hidden initially) */
-    #mainShop { display: none; animation: fadeIn 0.5s ease; }
-
-    .card {
-        background: var(--card);
-        border-radius: 20px;
-        padding: 20px;
-        border: 1px solid #30363d;
-    }
-
-    .diamond-grid { 
-        display: grid; 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px; 
-    }
-
-    .diamond-item {
-        background: var(--accent);
-        border-radius: 15px;
-        padding: 20px 10px;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.3s;
-        border: 1px solid transparent;
-    }
-
-    .diamond-item:hover {
-        border-color: var(--main);
-        background: rgba(0, 255, 213, 0.05);
-        transform: scale(1.03);
-    }
-
-    .price { display: block; color: var(--main); font-weight: 700; margin-top: 5px; }
-
-    /* Form Elements */
-    input {
-        width: 100%; padding: 15px; margin-top: 15px; border-radius: 12px;
-        border: 1px solid #30363d; background: #0d1117; color: white;
-        box-sizing: border-box; outline: none;
-    }
-    input:focus { border-color: var(--main); }
-
-    .btn {
-        margin-top: 25px; padding: 15px; background: var(--main);
-        color: #000; text-align: center; border-radius: 12px;
-        font-weight: 700; cursor: pointer; transition: 0.3s;
-    }
-    .btn:hover { background: var(--main-dark); }
+    /* Main Shop (Hidden initially) */
+    #mainShop { display: none; }
 
     .user-info {
         display: flex; justify-content: space-between; align-items: center;
-        background: var(--card); padding: 12px 20px; border-radius: 15px;
+        background: var(--card); padding: 15px 20px; border-radius: 18px;
         margin-bottom: 20px; border: 1px solid #30363d;
     }
 
-    .logout-btn { color: #f85149; cursor: pointer; font-size: 14px; font-weight: 600; }
+    .logout-btn { color: #f85149; cursor: pointer; font-size: 14px; font-weight: 600; padding: 5px 10px; border-radius: 8px; background: rgba(248, 81, 73, 0.1); }
+
+    /* Diamond Grid */
+    .grid-container {
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+        gap: 12px; 
+    }
+
+    .dia-item {
+        background: var(--card);
+        border-radius: 18px;
+        padding: 15px 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        border: 1px solid #30363d;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dia-item:hover {
+        border-color: var(--main);
+        background: var(--accent);
+        transform: translateY(-3px);
+    }
+
+    .dia-item .amount { display: block; font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+    .dia-item .price { color: var(--main); font-weight: 600; font-size: 13px; }
+
+    .badge {
+        position: absolute; top: 0; right: 0; background: var(--main);
+        color: #000; font-size: 9px; padding: 2px 8px; font-weight: bold;
+        border-bottom-left-radius: 10px;
+    }
+
+    /* Forms & Buttons */
+    input {
+        width: 100%; padding: 15px; margin-top: 12px; border-radius: 12px;
+        border: 1px solid #30363d; background: #0d1117; color: white;
+        box-sizing: border-box; outline: none; font-family: inherit;
+    }
+
+    .btn {
+        margin-top: 20px; padding: 15px; background: var(--main);
+        color: #000; text-align: center; border-radius: 12px;
+        font-weight: 700; cursor: pointer; transition: 0.3s;
+    }
 
     /* Popup */
     #popupBg {
         display:none; position:fixed; inset:0; 
-        background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
-        z-index: 999; padding: 20px;
+        background: rgba(0,0,0,0.9); backdrop-filter: blur(8px);
+        z-index: 999; padding: 20px; overflow-y: auto;
     }
+
     #popupBox {
-        background: var(--card); max-width: 400px; margin: 20px auto;
-        padding: 25px; border-radius: 25px; border: 1px solid var(--main);
+        background: var(--card); max-width: 400px; margin: 10px auto;
+        padding: 25px; border-radius: 25px; border: 1px solid #30363d;
     }
 </style>
 </head>
 <body>
 
-<header>PMK GAME SHOP</header>
+<header>PMK GAME SHOP 💎</header>
 
 <section id="authSection">
     <div class="auth-card">
-        <h2 style="text-align: center; margin-top: 0; letter-spacing: 2px;">AUTHENTICATION</h2>
         <div class="tabs">
             <div id="loginTab" class="tab active" onclick="switchAuth('login')">Login</div>
             <div id="signupTab" class="tab" onclick="switchAuth('signup')">Sign Up</div>
@@ -147,13 +148,12 @@
         <div id="loginForm">
             <input type="text" id="logUser" placeholder="Username">
             <input type="password" id="logPass" placeholder="Password">
-            <div class="btn" onclick="processAuth()">LOGIN ဝင်မည်</div>
+            <div class="btn" onclick="processAuth()">Login ဝင်မည်</div>
         </div>
 
         <div id="signupForm" style="display:none;">
             <input type="text" id="regUser" placeholder="Username အသစ်">
             <input type="password" id="regPass" placeholder="Password အသစ်">
-            <input type="password" placeholder="Confirm Password">
             <div class="btn" onclick="processAuth()">အကောင့်ဖွင့်မည်</div>
         </div>
     </div>
@@ -161,43 +161,68 @@
 
 <section id="mainShop">
     <div class="user-info">
-        <span>Player: <b id="userLabel" style="color:var(--main);">Guest</b></span>
+        <span>Welcome, <b id="userLabel" style="color:var(--main);">Guest</b> 👋</span>
         <span class="logout-btn" onclick="logout()">Logout</span>
     </div>
 
-    <div class="card">
-        <h2 style="color:var(--main); font-size: 18px; margin-top:0;">💎 MLBB DIAMONDS</h2>
-        <div class="diamond-grid">
-            <div class="diamond-item" onclick="choose('11 Diamond', '950')">
-                <span>11 💎</span><span class="price">950 Ks</span>
-            </div>
-            <div class="diamond-item" onclick="choose('56 Diamond', '4500')">
-                <span>56 💎</span><span class="price">4500 Ks</span>
-            </div>
-            <div class="diamond-item" onclick="choose('170 Diamond', '13500')">
-                <span>170 💎</span><span class="price">13,500 Ks</span>
-            </div>
-            <div class="diamond-item" onclick="choose('Weekly Pass', '5700')">
-                <span>Weekly 🎟</span><span class="price">5,700 Ks</span>
-            </div>
+    <h3 style="margin-bottom:15px; font-size: 16px;">🔥 MLBB POPULAR PACKS</h3>
+    <div class="grid-container">
+        <div class="dia-item" onclick="choose('11 Diamond', '950')">
+            <span class="amount">11 Diamonds</span><span class="price">950 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('56 Diamond', '4500')">
+            <span class="amount">56 Diamonds</span><span class="price">4,500 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('112 Diamond', '8900')">
+            <span class="amount">112 Diamonds</span><span class="price">8,900 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('170 Diamond', '13500')">
+            <span class="amount">170 Diamonds</span><span class="price">13,500 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('282 Diamond', '22000')">
+            <span class="amount">282 Diamonds</span><span class="price">22,000 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('Weekly Pass', '5700')">
+            <div class="badge">HOT</div>
+            <span class="amount">Weekly Pass</span><span class="price">5,700 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('425 Diamond', '33000')">
+            <span class="amount">425 Diamonds</span><span class="price">33,000 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('568 Diamond', '44000')">
+            <span class="amount">568 Diamonds</span><span class="price">44,000 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('875 Diamond', '66000')">
+            <span class="amount">875 Diamonds</span><span class="price">66,000 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('1159 Diamond', '88000')">
+            <span class="amount">1159 Diamonds</span><span class="price">88,000 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('2010 Diamond', '155000')">
+            <div class="badge">BEST</div>
+            <span class="amount">2010 Diamonds</span><span class="price">155,000 Ks</span>
+        </div>
+        <div class="dia-item" onclick="choose('Twilight Pass', '28000')">
+            <span class="amount">Twilight Pass</span><span class="price">28,000 Ks</span>
         </div>
     </div>
 </section>
 
 <div id="popupBg">
     <div id="popupBox">
-        <h3 style="text-align:center; color:var(--main);">CONFIRM ORDER</h3>
-        <input type="text" id="itemName" readonly style="color:var(--main); font-weight:bold;">
+        <h3 style="text-align:center; color:var(--main); margin-top:0;">ORDER DETAILS</h3>
+        <input type="text" id="itemName" readonly style="color:var(--main); font-weight:bold; border-color: var(--main);">
         <div style="display: flex; gap: 10px;">
             <input type="number" id="gid" placeholder="Game ID">
-            <input type="number" id="sid" placeholder="Server">
+            <input type="number" id="sid" placeholder="Server ID">
         </div>
-        <input type="text" id="pNote" placeholder="Kpay နောက်ဆုံးဂဏန်း ၆ လုံး">
-        <p style="font-size: 12px; margin: 15px 0 5px 0;">ငွေလွှဲဖြတ်ပိုင်းတင်ပါ -</p>
+        <input type="text" id="pNote" placeholder="Kpay Last 6 Digits">
+        <p style="font-size: 11px; margin-top:15px; color:#8b949e;">ငွေလွှဲပြေစာ (Screenshot) တင်ပေးပါ</p>
         <input type="file" id="receipt" accept="image/*">
-        <div class="btn" onclick="sendToBot()">အော်ဒါတင်မည်</div>
-        <div class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closePopup()">ပယ်ဖျက်မည်</div>
-        <div id="statusMsg" style="text-align:center; margin-top:10px;"></div>
+        
+        <div class="btn" onclick="sendToBot()">ORDER တင်မည်</div>
+        <div class="btn" style="background:#21262d; color:#fff; margin-top:10px;" onclick="closePopup()">ပယ်ဖျက်မည်</div>
+        <div id="statusMsg" style="text-align:center; margin-top:15px; font-size:14px;"></div>
     </div>
 </div>
 
@@ -205,26 +230,21 @@
 const BOT_TOKEN = '8540139841:AAHk85ZhZybd1Wh_YAWqeCk6OpTCjqNojr8'; 
 const ADMIN_IDS = ['8582088849', '7090654595']; 
 
-// Login/Signup Switch
 function switchAuth(type) {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('signupForm').style.display = type === 'signup' ? 'block' : 'none';
-    document.getElementById('loginTab').classList.toggle('active', type === 'login');
-    document.getElementById('signupTab').classList.toggle('active', type === 'signup');
+    document.getElementById('loginTab').className = 'tab ' + (type === 'login' ? 'active' : '');
+    document.getElementById('signupTab').className = 'tab ' + (type === 'signup' ? 'active' : '');
 }
 
-// Auth Process
 function processAuth() {
     const user = document.getElementById('logUser').value || document.getElementById('regUser').value;
     const pass = document.getElementById('logPass').value || document.getElementById('regPass').value;
-
     if(user && pass) {
         document.getElementById('userLabel').innerText = user;
-        document.getElementById('authSection').style.display = 'none'; // Hide Login
-        document.getElementById('mainShop').style.display = 'block';   // Show Shop
-    } else {
-        alert("Username နှင့် Password ဖြည့်ပါ။");
-    }
+        document.getElementById('authSection').style.display = 'none';
+        document.getElementById('mainShop').style.display = 'block';
+    } else { alert("အချက်အလက်များ ဖြည့်စွက်ပါ"); }
 }
 
 function logout() { location.reload(); }
@@ -244,10 +264,12 @@ async function sendToBot() {
     const file = document.getElementById("receipt").files[0];
     const status = document.getElementById("statusMsg");
 
-    if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်စုံအောင်ဖြည့်ပါ။"); return; }
+    if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်စုံအောင် ဖြည့်ပါ"); return; }
 
-    status.innerText = "ပို့ဆောင်နေသည်...";
-    const caption = `📩 ORDER\n💎 Item: ${item}\n🎮 ID: ${gid} (${sid})\n💰 Note: ${pNote}`;
+    status.innerText = "Processing...";
+    status.style.color = "var(--main)";
+
+    const caption = `📩 NEW ORDER\n💎 Item: ${item}\n🎮 Game ID: ${gid}\n📱 Server ID: ${sid}\n💰 Note: ${pNote}`;
 
     let success = false;
     for (const id of ADMIN_IDS) {
@@ -262,11 +284,9 @@ async function sendToBot() {
     }
 
     if(success) {
-        status.innerText = "✅ အောင်မြင်ပါသည်။";
+        status.innerText = "✅ အော်ဒါတင်ခြင်း အောင်မြင်ပါသည်။";
         setTimeout(closePopup, 2000);
-    } else {
-        status.innerText = "❌ မအောင်မြင်ပါ။";
-    }
+    } else { status.innerText = "❌ မအောင်မြင်ပါ။ နောက်မှ ထပ်ကြိုးစားပါ။"; }
 }
 </script>
 </body>
