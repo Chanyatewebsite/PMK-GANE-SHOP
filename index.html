@@ -47,7 +47,6 @@
         border: 1px solid #30363d;
         box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         margin-top: 30px;
-        animation: fadeIn 0.5s ease;
     }
 
     .tabs { display: flex; background: var(--accent); border-radius: 15px; padding: 5px; margin-bottom: 25px; }
@@ -57,31 +56,21 @@
     #mainShop, #adminSection { display: none; }
 
     .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
-    .dia-item { background: var(--card); border-radius: 18px; padding: 15px 10px; text-align: center; cursor: pointer; border: 1px solid #30363d; position: relative; }
-    .dia-item:hover { border-color: var(--main); transform: translateY(-3px); transition: 0.3s; }
-    .dia-item .amount { display: block; font-weight: 700; font-size: 15px; }
+    .dia-item { background: var(--card); border-radius: 18px; padding: 15px 10px; text-align: center; cursor: pointer; border: 1px solid #30363d; position: relative; transition: 0.3s; }
+    .dia-item:hover { border-color: var(--main); transform: translateY(-3px); }
+    .dia-item .amount { display: block; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
     .dia-item .price { color: var(--main); font-weight: 600; font-size: 13px; }
 
-    input, select {
-        width: 100%; padding: 15px; margin-top: 12px; border-radius: 12px;
-        border: 1px solid #30363d; background: #0d1117; color: white;
-        box-sizing: border-box; outline: none; font-family: inherit;
-    }
+    .badge { position: absolute; top: 0; right: 0; background: var(--main); color: #000; font-size: 9px; padding: 2px 8px; font-weight: bold; border-bottom-left-radius: 10px; }
 
+    input, select { width: 100%; padding: 15px; margin-top: 12px; border-radius: 12px; border: 1px solid #30363d; background: #0d1117; color: white; box-sizing: border-box; outline: none; }
     .btn { margin-top: 20px; padding: 15px; background: var(--main); color: #000; text-align: center; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
-    /* Payment UI */
     .pay-selector { display: flex; gap: 10px; margin-top: 15px; }
-    .pay-option { 
-        flex: 1; padding: 10px; border: 1px solid #30363d; border-radius: 12px; 
-        text-align: center; cursor: pointer; font-size: 14px; transition: 0.3s;
-    }
+    .pay-option { flex: 1; padding: 10px; border: 1px solid #30363d; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; }
     .pay-option.active { border-color: var(--main); background: rgba(0,255,213,0.1); color: var(--main); }
 
-    .payment-info {
-        background: rgba(255,255,255,0.05); border: 1px dashed var(--main);
-        padding: 15px; border-radius: 15px; margin-top: 15px; text-align: center;
-    }
+    .payment-info { background: rgba(255,255,255,0.05); border: 1px dashed var(--main); padding: 15px; border-radius: 15px; margin-top: 15px; text-align: center; }
 
     #popupBg { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index: 999; padding: 20px; overflow-y: auto; }
     #popupBox { background: var(--card); max-width: 400px; margin: 10px auto; padding: 25px; border-radius: 25px; border: 1px solid #30363d; }
@@ -121,15 +110,28 @@
 </section>
 
 <section id="mainShop">
-    <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-        <span>Welcome, <b id="userLabel" style="color:var(--main);">Guest</b></span>
-        <span onclick="logout()" style="color:#f85149; cursor:pointer;">Logout</span>
+    <div style="display:flex; justify-content:space-between; margin-bottom:20px; background:var(--card); padding:15px; border-radius:15px; border:1px solid #30363d;">
+        <span>Welcome, <b id="userLabel" style="color:var(--main);">Guest</b> 👋</span>
+        <span onclick="logout()" style="color:#f85149; cursor:pointer; font-weight:bold;">Logout</span>
     </div>
+
+    <h3 style="margin-bottom:15px; font-size: 16px;">🔥 MLBB DIAMOND PACKS</h3>
     <div class="grid-container">
         <div class="dia-item" onclick="choose('11 Diamond', '950')"><span class="amount">11 💎</span><span class="price">950 Ks</span></div>
-        <div class="dia-item" onclick="choose('56 Diamond', '4500')"><span class="amount">56 💎</span><span class="price">4500 Ks</span></div>
-        <div class="dia-item" onclick="choose('Weekly Pass', '5700')"><span class="amount">Weekly</span><span class="price">5700 Ks</span></div>
-        <div class="dia-item" onclick="choose('282 Diamond', '22000')"><span class="amount">282 💎</span><span class="price">22000 Ks</span></div>
+        <div class="dia-item" onclick="choose('56 Diamond', '4500')"><span class="amount">56 💎</span><span class="price">4,500 Ks</span></div>
+        <div class="dia-item" onclick="choose('112 Diamond', '8900')"><span class="amount">112 💎</span><span class="price">8,900 Ks</span></div>
+        <div class="dia-item" onclick="choose('Weekly Pass', '5700')"><div class="badge">HOT</div><span class="amount">Weekly Pass</span><span class="price">5,700 Ks</span></div>
+        <div class="dia-item" onclick="choose('170 Diamond', '13500')"><span class="amount">170 💎</span><span class="price">13,500 Ks</span></div>
+        <div class="dia-item" onclick="choose('282 Diamond', '22000')"><span class="amount">282 💎</span><span class="price">22,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('425 Diamond', '33000')"><span class="amount">425 💎</span><span class="price">33,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('568 Diamond', '44000')"><span class="amount">568 💎</span><span class="price">44,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('875 Diamond', '66000')"><span class="amount">875 💎</span><span class="price">66,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('1159 Diamond', '88000')"><span class="amount">1159 💎</span><span class="price">88,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('2010 Diamond', '155000')"><div class="badge">BEST</div><span class="amount">2010 💎</span><span class="price">155,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('Twilight Pass', '28000')"><span class="amount">Twilight Pass</span><span class="price">28,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('2976 Diamond', '235000')"><span class="amount">2976 💎</span><span class="price">235,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('4026 Diamond', '315000')"><span class="amount">4026 💎</span><span class="price">315,000 Ks</span></div>
+        <div class="dia-item" onclick="choose('6040 Diamond', '470000')"><span class="amount">6040 💎</span><span class="price">470,000 Ks</span></div>
     </div>
 </section>
 
@@ -137,7 +139,6 @@
     <div id="popupBox">
         <h3 style="text-align:center; color:var(--main); margin:0;">ORDER DETAILS</h3>
         
-        <p style="text-align:center; font-size:12px; color:#8b949e; margin-bottom:5px;">Payment ရွေးချယ်ပါ</p>
         <div class="pay-selector">
             <div class="pay-option active" id="payKpay" onclick="setPayment('Kpay')">Kpay</div>
             <div class="pay-option" id="payWave" onclick="setPayment('Wave')">Wave</div>
@@ -145,27 +146,29 @@
 
         <div class="payment-info">
             <span id="payName" style="font-size:13px; color:var(--main);">Kpay လွှဲရန်</span><br>
-            <b style="font-size:18px;">09 750 216 431</b><br>
+            <b style="font-size:18px; letter-spacing:1px;">09 750 216 431</b><br>
             <small>(Nyein Ei Phyo)</small>
         </div>
 
-        <input type="text" id="itemName" readonly>
+        <input type="text" id="itemName" readonly style="color:var(--main); font-weight:bold;">
         <div style="display: flex; gap: 10px;">
             <input type="number" id="gid" placeholder="Game ID">
             <input type="number" id="sid" placeholder="Server ID">
         </div>
-        <input type="text" id="pNote" placeholder="ငွေလွှဲဂဏန်း ၆ လုံး">
+        <input type="text" id="pNote" placeholder="ငွေလွှဲဂဏန်း နောက်ဆုံး ၆ လုံး">
+        <p style="font-size:11px; color:#8b949e; margin:10px 0 0 5px;">ငွေလွှဲပြေစာတင်ပါ</p>
         <input type="file" id="receipt" accept="image/*" style="font-size:12px;">
         
         <div class="btn" onclick="sendToBot()">ORDER တင်မည်</div>
         <div class="btn" style="background:#21262d; color:#fff; margin-top:10px;" onclick="closePopup()">ပယ်ဖျက်မည်</div>
-        <div id="statusMsg" style="text-align:center; margin-top:10px;"></div>
+        <div id="statusMsg" style="text-align:center; margin-top:10px; font-size:14px;"></div>
     </div>
 </div>
 
 <script>
 const BOT_TOKEN = '8540139841:AAHk85ZhZybd1Wh_YAWqeCk6OpTCjqNojr8'; 
 const ADMIN_IDS = ['8582088849', '7090654595']; 
+
 let selectedPayment = "Kpay";
 let bannedUsers = JSON.parse(localStorage.getItem('bannedUsers')) || [];
 
@@ -179,18 +182,21 @@ function switchAuth(type) {
 function processAuth() {
     const user = (document.getElementById('logUser').value || document.getElementById('regUser').value).trim();
     const pass = document.getElementById('logPass').value || document.getElementById('regPass').value;
+
     if(user === "admin123" && pass === "admin") {
         document.getElementById('authSection').style.display = 'none';
         document.getElementById('adminSection').style.display = 'block';
         renderBanList();
         return;
     }
-    if(bannedUsers.includes(user)) { alert("သင့်အကောင့် Ban ခံထားရပါတယ်"); return; }
+
+    if(bannedUsers.includes(user)) { alert("သင့်အကောင့် ပိတ်ပင်ခံထားရပါသည်"); return; }
+    
     if(user && pass) {
         document.getElementById('userLabel').innerText = user;
         document.getElementById('authSection').style.display = 'none';
         document.getElementById('mainShop').style.display = 'block';
-    }
+    } else { alert("အချက်အလက်ပြည့်စုံစွာဖြည့်ပါ"); }
 }
 
 function setPayment(type) {
@@ -215,9 +221,9 @@ async function sendToBot() {
     const file = document.getElementById("receipt").files[0];
     const status = document.getElementById("statusMsg");
 
-    if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်အပြည့်အစုံဖြည့်ပါ"); return; }
+    if (!gid || !sid || !pNote || !file) { alert("အချက်အလက်အကုန်ဖြည့်ပါ"); return; }
 
-    status.innerText = "Processing...";
+    status.innerText = "ခဏစောင့်ပါ...";
     const caption = `📩 NEW ORDER\n💎 Item: ${item}\n🎮 ID: ${gid} (${sid})\n💰 Method: ${selectedPayment}\n🔢 Note: ${pNote}`;
 
     let success = false;
@@ -231,16 +237,17 @@ async function sendToBot() {
             if(res.ok) success = true;
         } catch (e) {}
     }
-    if(success) { alert("Order အောင်မြင်ပါတယ်"); location.reload(); }
+    if(success) { alert("Order အောင်မြင်ပါသည်"); closePopup(); }
+    else { status.innerText = "မအောင်မြင်ပါ၊ နောက်မှပြန်ကြိုးစားပါ။"; }
 }
 
 function banUser() {
     const u = document.getElementById('banUserField').value.trim();
-    if(u) { bannedUsers.push(u); localStorage.setItem('bannedUsers', JSON.stringify(bannedUsers)); renderBanList(); }
+    if(u && !bannedUsers.includes(u)) { bannedUsers.push(u); localStorage.setItem('bannedUsers', JSON.stringify(bannedUsers)); renderBanList(); }
 }
 
 function renderBanList() {
-    document.getElementById('banList').innerHTML = bannedUsers.map(u => `<div style="display:flex; justify-content:space-between; background:#0d1117; padding:8px; margin-top:5px; border-radius:8px;"><span>${u}</span><span onclick="unban('${u}')" style="color:red; cursor:pointer;">Unban</span></div>`).join('');
+    document.getElementById('banList').innerHTML = bannedUsers.map(u => `<div style="display:flex; justify-content:space-between; background:#0d1117; padding:10px; margin-top:5px; border-radius:8px;"><span>${u}</span><span onclick="unban('${u}')" style="color:#f85149; cursor:pointer;">Unban</span></div>`).join('');
 }
 
 function unban(u) { bannedUsers = bannedUsers.filter(x => x !== u); localStorage.setItem('bannedUsers', JSON.stringify(bannedUsers)); renderBanList(); }
