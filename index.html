@@ -96,7 +96,7 @@
             <input type="number" id="gid" placeholder="Game ID">
             <input type="number" id="sid" placeholder="Zone ID">
         </div>
-        <input type="text" id="pNote" placeholder="မှတ်ချက် (ရှိလျှင်)">
+        <input type="text" id="pNote" placeholder="လုပ်ငန်းစင်အမှတ် 5 လုံးထည့်ပါ">
         <p style="font-size: 12px; color: #8b949e; margin: 15px 0 5px 5px;">ငွေလွှဲဖြတ်ပိုင်းတင်ရန် :</p>
         <input type="file" id="receipt" accept="image/*" style="margin-top: 0;">
         <div class="btn" onclick="sendToBot()">CONFIRM ORDER 🚀</div>
@@ -215,7 +215,7 @@ async function sendToBot() {
     const pNote = document.getElementById("pNote").value;
     const file = document.getElementById("receipt").files[0];
 
-    if (!gid || !file) { alert("Game ID နှင့် ငွေလွှဲဖြတ်ပိုင်း ထည့်သွင်းပေးပါ"); return; }
+    if (!gid || !file) { alert("Game ID နှင့်ရှိလျှင်ည့်သွင်းပေးပါ"); return; }
 
     const caption = `🛒 *NEW ORDER RECEIVED*\n\n👤 *User:* ${currentUser}\n💎 *Item:* ${item}\n🆔 *Game ID:* ${gid} (${sid})\n💳 *Method:* ${selectedPayment}\n📝 *Note:* ${pNote || 'None'}`;
 
